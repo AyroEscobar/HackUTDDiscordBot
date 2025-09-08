@@ -4,6 +4,8 @@ import logging
 from dotenv import load_dotenv
 import os
 from better_profanity import profanity
+from profanity_filter import setup_profanity_filter  # Import your function
+
 
 
 #Documentation Link: https://discordpy.readthedocs.io/en/stable/
@@ -44,21 +46,17 @@ async def on_ready():
 async def on_member_join(member):
     await member.send(f"Welcome to the server, {member.name}")
 
-@bot.event
-async def on_message(message):
-    if message.author == bot.user:
-        return
-    
-    if profanity.contains_profanity(message.content):
-        await message.delete()
-        await message.channel.send(f"{message.author.mention} - don't use that word!")
 
-    #Need to call this so that the overriding functions can keep being called
-    await bot.process_commands(message)
+setup_profanity_filter(bot)
+
 
 @bot.command()
 async def hello(ctx):
     await ctx.send(f"Hello {ctx.author.mention}!")
+
+# @bot.command()
+# async def assign(ctx):
+#     role
     
 
     
