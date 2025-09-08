@@ -37,6 +37,8 @@ intents.members = True
 #parameters command_prefix, intent
 bot = commands.Bot(command_prefix ='!', intents = intents)
 
+gamerRole = "Gamer"
+
 #Decorator in python 
 @bot.event
 async def on_ready():
@@ -54,9 +56,24 @@ setup_profanity_filter(bot)
 async def hello(ctx):
     await ctx.send(f"Hello {ctx.author.mention}!")
 
-# @bot.command()
-# async def assign(ctx):
-#     role
+@bot.command()
+async def assign(ctx):
+    role = discord.utils.get(ctx.guild.roles, name = gamerRole)
+    if role:
+        await ctx.author.add_roles(role)
+        await ctx.send(f"{ctx.author.mention} is now assigned to {gamerRole}")
+    else:
+        await ctx.send("Role doesn't exist")
+
+
+@bot.command()
+async def remove(ctx):
+    role = discord.utils.get(ctx.guild.roles, name = gamerRole)
+    if role:
+        await ctx.author.remove_roles(role)
+        await ctx.send(f"{ctx.author.mention} has had the {gamerRole} removed ")
+    else:
+        await ctx.send("Role doesn't exist")
     
 
     
