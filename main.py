@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 from better_profanity import profanity
 from profanity_filter import setup_profanity_filter  # Import your function
+from quote_system import setup_quote_commands
 
 
 
@@ -50,6 +51,7 @@ async def on_member_join(member):
 
 
 setup_profanity_filter(bot)
+setup_quote_commands(bot)
 
 
 @bot.command()
