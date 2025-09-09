@@ -6,6 +6,8 @@ import os
 from better_profanity import profanity
 from profanity_filter import setup_profanity_filter  # Import your function
 from quote_system import setup_quote_commands
+from verification_system import setup_verification_system, handle_member_join
+
 
 
 
@@ -37,6 +39,18 @@ intents.members = True
 
 #parameters command_prefix, intent
 bot = commands.Bot(command_prefix ='!', intents = intents)
+
+@bot.event
+async def on_ready():
+    print(f'{bot.user} has connected to Discord!')
+    
+    # Set up verification for all guilds
+    for guild in bot.guilds:
+        await setup_verification_system(guild)
+
+@bot.event
+async def on_member_join(member):
+    await handle_member_join(member)
 
 gamerRole = "Gamer"
 
