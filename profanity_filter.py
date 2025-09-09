@@ -10,7 +10,7 @@ def setup_profanity_filter(bot):
         
         if profanity.contains_profanity(message.content):
             await message.delete()
-            await message.channel.send(f"{message.author.mention} - don't use that word bro!")
+            await message.channel.send(f"{message.author.mention} - don't use that word tester!")
 
         # Need to call this so that the overriding functions can keep being called
         await bot.process_commands(message)
