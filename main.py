@@ -66,6 +66,7 @@ async def on_member_join(member):
 
 setup_profanity_filter(bot)
 setup_quote_commands(bot)
+setup_verification_system(bot)
 
 
 @bot.command()
